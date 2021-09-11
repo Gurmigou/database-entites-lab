@@ -1,4 +1,8 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/databaseLab.dir/entities/Customer.c.obj"
+  "CMakeFiles/databaseLab.dir/entities/CustomerMetaEntity.c.obj"
+  "CMakeFiles/databaseLab.dir/entities/Review.c.obj"
+  "CMakeFiles/databaseLab.dir/entities/ReviewMetaEntity.c.obj"
   "CMakeFiles/databaseLab.dir/main.c.obj"
   "CMakeFiles/databaseLab.dir/src/CRUD.c.obj"
   "CMakeFiles/databaseLab.dir/src/FileUtility.c.obj"

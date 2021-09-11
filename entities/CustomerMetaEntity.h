@@ -2,23 +2,17 @@
 #ifndef DATABASELAB_CUSTOMERMETAENTITY_H
 #define DATABASELAB_CUSTOMERMETAENTITY_H
 
+#include <stdbool.h>
 #include "Customer.h"
-#include "stdbool.h"
 
 typedef struct CustomerMetaEntity {
+    int pk;
     Customer customer;
     bool deleted;
     int nextReviewIndex;
     int numOfReviews;
 } CustomerMetaEntity;
 
-struct CustomerMetaEntity* newCustomerMetaEntity(Customer customer) {
-    struct CustomerMetaEntity* customerMetaEntity = malloc(sizeof(CustomerMetaEntity));
-    customerMetaEntity->customer = customer;
-    customerMetaEntity->deleted = false;
-    customerMetaEntity->nextReviewIndex = 0;
-    customerMetaEntity->numOfReviews = 0;
-    return customerMetaEntity;
-}
+CustomerMetaEntity* newCustomerMetaEntity(int pk, Customer customer);
 
 #endif //DATABASELAB_CUSTOMERMETAENTITY_H

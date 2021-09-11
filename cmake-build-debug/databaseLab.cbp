@@ -74,7 +74,13 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="C:/Users/Yehor/CLionProjects/databaseLab/entities/Customer.c">
+			<Option target="databaseLab"/>
+		</Unit>
 		<Unit filename="C:/Users/Yehor/CLionProjects/databaseLab/entities/Customer.h">
+			<Option target="databaseLab"/>
+		</Unit>
+		<Unit filename="C:/Users/Yehor/CLionProjects/databaseLab/entities/CustomerMetaEntity.c">
 			<Option target="databaseLab"/>
 		</Unit>
 		<Unit filename="C:/Users/Yehor/CLionProjects/databaseLab/entities/CustomerMetaEntity.h">
@@ -83,7 +89,13 @@
 		<Unit filename="C:/Users/Yehor/CLionProjects/databaseLab/entities/IndexEntity.h">
 			<Option target="databaseLab"/>
 		</Unit>
+		<Unit filename="C:/Users/Yehor/CLionProjects/databaseLab/entities/Review.c">
+			<Option target="databaseLab"/>
+		</Unit>
 		<Unit filename="C:/Users/Yehor/CLionProjects/databaseLab/entities/Review.h">
+			<Option target="databaseLab"/>
+		</Unit>
+		<Unit filename="C:/Users/Yehor/CLionProjects/databaseLab/entities/ReviewMetaEntity.c">
 			<Option target="databaseLab"/>
 		</Unit>
 		<Unit filename="C:/Users/Yehor/CLionProjects/databaseLab/entities/ReviewMetaEntity.h">

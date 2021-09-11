@@ -128,6 +128,102 @@ databaseLab/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\databaseLab.dir\build.make CMakeFiles/databaseLab.dir/build
 .PHONY : databaseLab/fast
 
+entities/Customer.obj: entities/Customer.c.obj
+.PHONY : entities/Customer.obj
+
+# target to build an object file
+entities/Customer.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\databaseLab.dir\build.make CMakeFiles/databaseLab.dir/entities/Customer.c.obj
+.PHONY : entities/Customer.c.obj
+
+entities/Customer.i: entities/Customer.c.i
+.PHONY : entities/Customer.i
+
+# target to preprocess a source file
+entities/Customer.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\databaseLab.dir\build.make CMakeFiles/databaseLab.dir/entities/Customer.c.i
+.PHONY : entities/Customer.c.i
+
+entities/Customer.s: entities/Customer.c.s
+.PHONY : entities/Customer.s
+
+# target to generate assembly for a file
+entities/Customer.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\databaseLab.dir\build.make CMakeFiles/databaseLab.dir/entities/Customer.c.s
+.PHONY : entities/Customer.c.s
+
+entities/CustomerMetaEntity.obj: entities/CustomerMetaEntity.c.obj
+.PHONY : entities/CustomerMetaEntity.obj
+
+# target to build an object file
+entities/CustomerMetaEntity.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\databaseLab.dir\build.make CMakeFiles/databaseLab.dir/entities/CustomerMetaEntity.c.obj
+.PHONY : entities/CustomerMetaEntity.c.obj
+
+entities/CustomerMetaEntity.i: entities/CustomerMetaEntity.c.i
+.PHONY : entities/CustomerMetaEntity.i
+
+# target to preprocess a source file
+entities/CustomerMetaEntity.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\databaseLab.dir\build.make CMakeFiles/databaseLab.dir/entities/CustomerMetaEntity.c.i
+.PHONY : entities/CustomerMetaEntity.c.i
+
+entities/CustomerMetaEntity.s: entities/CustomerMetaEntity.c.s
+.PHONY : entities/CustomerMetaEntity.s
+
+# target to generate assembly for a file
+entities/CustomerMetaEntity.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\databaseLab.dir\build.make CMakeFiles/databaseLab.dir/entities/CustomerMetaEntity.c.s
+.PHONY : entities/CustomerMetaEntity.c.s
+
+entities/Review.obj: entities/Review.c.obj
+.PHONY : entities/Review.obj
+
+# target to build an object file
+entities/Review.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\databaseLab.dir\build.make CMakeFiles/databaseLab.dir/entities/Review.c.obj
+.PHONY : entities/Review.c.obj
+
+entities/Review.i: entities/Review.c.i
+.PHONY : entities/Review.i
+
+# target to preprocess a source file
+entities/Review.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\databaseLab.dir\build.make CMakeFiles/databaseLab.dir/entities/Review.c.i
+.PHONY : entities/Review.c.i
+
+entities/Review.s: entities/Review.c.s
+.PHONY : entities/Review.s
+
+# target to generate assembly for a file
+entities/Review.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\databaseLab.dir\build.make CMakeFiles/databaseLab.dir/entities/Review.c.s
+.PHONY : entities/Review.c.s
+
+entities/ReviewMetaEntity.obj: entities/ReviewMetaEntity.c.obj
+.PHONY : entities/ReviewMetaEntity.obj
+
+# target to build an object file
+entities/ReviewMetaEntity.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\databaseLab.dir\build.make CMakeFiles/databaseLab.dir/entities/ReviewMetaEntity.c.obj
+.PHONY : entities/ReviewMetaEntity.c.obj
+
+entities/ReviewMetaEntity.i: entities/ReviewMetaEntity.c.i
+.PHONY : entities/ReviewMetaEntity.i
+
+# target to preprocess a source file
+entities/ReviewMetaEntity.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\databaseLab.dir\build.make CMakeFiles/databaseLab.dir/entities/ReviewMetaEntity.c.i
+.PHONY : entities/ReviewMetaEntity.c.i
+
+entities/ReviewMetaEntity.s: entities/ReviewMetaEntity.c.s
+.PHONY : entities/ReviewMetaEntity.s
+
+# target to generate assembly for a file
+entities/ReviewMetaEntity.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\databaseLab.dir\build.make CMakeFiles/databaseLab.dir/entities/ReviewMetaEntity.c.s
+.PHONY : entities/ReviewMetaEntity.c.s
+
 main.obj: main.c.obj
 .PHONY : main.obj
 
@@ -233,6 +329,18 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... databaseLab
+	@echo ... entities/Customer.obj
+	@echo ... entities/Customer.i
+	@echo ... entities/Customer.s
+	@echo ... entities/CustomerMetaEntity.obj
+	@echo ... entities/CustomerMetaEntity.i
+	@echo ... entities/CustomerMetaEntity.s
+	@echo ... entities/Review.obj
+	@echo ... entities/Review.i
+	@echo ... entities/Review.s
+	@echo ... entities/ReviewMetaEntity.obj
+	@echo ... entities/ReviewMetaEntity.i
+	@echo ... entities/ReviewMetaEntity.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

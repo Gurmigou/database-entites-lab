@@ -4,6 +4,7 @@
 #define DATABASELAB_REVIEW_H
 
 #include <malloc.h>
+#include <string.h>
 
 typedef struct Review {
     char text[512];
@@ -13,12 +14,6 @@ typedef struct Review {
     int customerId;
 } Review;
 
-struct Review* newReview(char text[512], char createdData[11], int customerId) {
-    struct Review* review = malloc(sizeof(Review));
-    strcpy(review->text, text);
-    strcpy(review->createdData, createdData);
-    review->customerId = customerId;
-    return review;
-}
+Review* newReview(char text[512], char createdData[11], int customerId);
 
 #endif //DATABASELAB_REVIEW_H

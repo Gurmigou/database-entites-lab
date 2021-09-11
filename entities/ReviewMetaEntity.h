@@ -6,15 +6,11 @@
 #include "Review.h"
 
 typedef struct ReviewMetaEntity {
+    int pk;
     Review review;
     int nextReviewIndex;
 } ReviewMetaEntity;
 
-struct ReviewMetaEntity* newReviewMetaEntity(Review review) {
-    struct ReviewMetaEntity* reviewMetaEntity = malloc(sizeof(ReviewMetaEntity));
-    reviewMetaEntity->review = review;
-    reviewMetaEntity->nextReviewIndex = 0;
-    return reviewMetaEntity;
-}
+ReviewMetaEntity* newReviewMetaEntity(int pk, Review review);
 
 #endif //DATABASELAB_REVIEWMETAENTITY_H

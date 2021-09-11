@@ -5,13 +5,14 @@
 
 #include "stdio.h"
 
+#include "FileUtility.h"
 #include "../entities/CustomerMetaEntity.h"
 #include "../entities/ReviewMetaEntity.h"
 #include "../entities/IndexEntity.h"
 
-char customerPath[] = "C:\\Users\\Yehor\\CLionProjects\\databaseLab\\tables\\customer.bin";
-char reviewPath[] = "C:\\Users\\Yehor\\CLionProjects\\databaseLab\\tables\\review.bin";
-char mathTablePath[] = "C:\\Users\\Yehor\\CLionProjects\\databaseLab\\tables\\match-table.bin";
+extern const char customerPath[];
+extern const char reviewPath[];
+extern const char mathTablePath[];
 
 void createM(struct CustomerMetaEntity* data);
 void createS(struct ReviewMetaEntity* data, int fkValue);

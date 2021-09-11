@@ -117,12 +117,68 @@ CMakeFiles/databaseLab.dir/src/MetaDB.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/databaseLab.dir/src/MetaDB.c.s"
 	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\Yehor\CLionProjects\databaseLab\src\MetaDB.c -o CMakeFiles\databaseLab.dir\src\MetaDB.c.s
 
+CMakeFiles/databaseLab.dir/entities/ReviewMetaEntity.c.obj: CMakeFiles/databaseLab.dir/flags.make
+CMakeFiles/databaseLab.dir/entities/ReviewMetaEntity.c.obj: ../entities/ReviewMetaEntity.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Yehor\CLionProjects\databaseLab\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/databaseLab.dir/entities/ReviewMetaEntity.c.obj"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\databaseLab.dir\entities\ReviewMetaEntity.c.obj -c C:\Users\Yehor\CLionProjects\databaseLab\entities\ReviewMetaEntity.c
+
+CMakeFiles/databaseLab.dir/entities/ReviewMetaEntity.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/databaseLab.dir/entities/ReviewMetaEntity.c.i"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\Yehor\CLionProjects\databaseLab\entities\ReviewMetaEntity.c > CMakeFiles\databaseLab.dir\entities\ReviewMetaEntity.c.i
+
+CMakeFiles/databaseLab.dir/entities/ReviewMetaEntity.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/databaseLab.dir/entities/ReviewMetaEntity.c.s"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\Yehor\CLionProjects\databaseLab\entities\ReviewMetaEntity.c -o CMakeFiles\databaseLab.dir\entities\ReviewMetaEntity.c.s
+
+CMakeFiles/databaseLab.dir/entities/Review.c.obj: CMakeFiles/databaseLab.dir/flags.make
+CMakeFiles/databaseLab.dir/entities/Review.c.obj: ../entities/Review.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Yehor\CLionProjects\databaseLab\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/databaseLab.dir/entities/Review.c.obj"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\databaseLab.dir\entities\Review.c.obj -c C:\Users\Yehor\CLionProjects\databaseLab\entities\Review.c
+
+CMakeFiles/databaseLab.dir/entities/Review.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/databaseLab.dir/entities/Review.c.i"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\Yehor\CLionProjects\databaseLab\entities\Review.c > CMakeFiles\databaseLab.dir\entities\Review.c.i
+
+CMakeFiles/databaseLab.dir/entities/Review.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/databaseLab.dir/entities/Review.c.s"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\Yehor\CLionProjects\databaseLab\entities\Review.c -o CMakeFiles\databaseLab.dir\entities\Review.c.s
+
+CMakeFiles/databaseLab.dir/entities/CustomerMetaEntity.c.obj: CMakeFiles/databaseLab.dir/flags.make
+CMakeFiles/databaseLab.dir/entities/CustomerMetaEntity.c.obj: ../entities/CustomerMetaEntity.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Yehor\CLionProjects\databaseLab\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/databaseLab.dir/entities/CustomerMetaEntity.c.obj"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\databaseLab.dir\entities\CustomerMetaEntity.c.obj -c C:\Users\Yehor\CLionProjects\databaseLab\entities\CustomerMetaEntity.c
+
+CMakeFiles/databaseLab.dir/entities/CustomerMetaEntity.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/databaseLab.dir/entities/CustomerMetaEntity.c.i"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\Yehor\CLionProjects\databaseLab\entities\CustomerMetaEntity.c > CMakeFiles\databaseLab.dir\entities\CustomerMetaEntity.c.i
+
+CMakeFiles/databaseLab.dir/entities/CustomerMetaEntity.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/databaseLab.dir/entities/CustomerMetaEntity.c.s"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\Yehor\CLionProjects\databaseLab\entities\CustomerMetaEntity.c -o CMakeFiles\databaseLab.dir\entities\CustomerMetaEntity.c.s
+
+CMakeFiles/databaseLab.dir/entities/Customer.c.obj: CMakeFiles/databaseLab.dir/flags.make
+CMakeFiles/databaseLab.dir/entities/Customer.c.obj: ../entities/Customer.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Yehor\CLionProjects\databaseLab\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/databaseLab.dir/entities/Customer.c.obj"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\databaseLab.dir\entities\Customer.c.obj -c C:\Users\Yehor\CLionProjects\databaseLab\entities\Customer.c
+
+CMakeFiles/databaseLab.dir/entities/Customer.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/databaseLab.dir/entities/Customer.c.i"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\Yehor\CLionProjects\databaseLab\entities\Customer.c > CMakeFiles\databaseLab.dir\entities\Customer.c.i
+
+CMakeFiles/databaseLab.dir/entities/Customer.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/databaseLab.dir/entities/Customer.c.s"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\Yehor\CLionProjects\databaseLab\entities\Customer.c -o CMakeFiles\databaseLab.dir\entities\Customer.c.s
+
 # Object files for target databaseLab
 databaseLab_OBJECTS = \
 "CMakeFiles/databaseLab.dir/main.c.obj" \
 "CMakeFiles/databaseLab.dir/src/FileUtility.c.obj" \
 "CMakeFiles/databaseLab.dir/src/CRUD.c.obj" \
-"CMakeFiles/databaseLab.dir/src/MetaDB.c.obj"
+"CMakeFiles/databaseLab.dir/src/MetaDB.c.obj" \
+"CMakeFiles/databaseLab.dir/entities/ReviewMetaEntity.c.obj" \
+"CMakeFiles/databaseLab.dir/entities/Review.c.obj" \
+"CMakeFiles/databaseLab.dir/entities/CustomerMetaEntity.c.obj" \
+"CMakeFiles/databaseLab.dir/entities/Customer.c.obj"
 
 # External object files for target databaseLab
 databaseLab_EXTERNAL_OBJECTS =
@@ -131,11 +187,15 @@ databaseLab.exe: CMakeFiles/databaseLab.dir/main.c.obj
 databaseLab.exe: CMakeFiles/databaseLab.dir/src/FileUtility.c.obj
 databaseLab.exe: CMakeFiles/databaseLab.dir/src/CRUD.c.obj
 databaseLab.exe: CMakeFiles/databaseLab.dir/src/MetaDB.c.obj
+databaseLab.exe: CMakeFiles/databaseLab.dir/entities/ReviewMetaEntity.c.obj
+databaseLab.exe: CMakeFiles/databaseLab.dir/entities/Review.c.obj
+databaseLab.exe: CMakeFiles/databaseLab.dir/entities/CustomerMetaEntity.c.obj
+databaseLab.exe: CMakeFiles/databaseLab.dir/entities/Customer.c.obj
 databaseLab.exe: CMakeFiles/databaseLab.dir/build.make
 databaseLab.exe: CMakeFiles/databaseLab.dir/linklibs.rsp
 databaseLab.exe: CMakeFiles/databaseLab.dir/objects1.rsp
 databaseLab.exe: CMakeFiles/databaseLab.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\Yehor\CLionProjects\databaseLab\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking C executable databaseLab.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\Yehor\CLionProjects\databaseLab\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking C executable databaseLab.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\databaseLab.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

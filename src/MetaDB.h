@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <malloc.h>
 
-char metaPath[] = "C:\\Users\\Yehor\\CLionProjects\\databaseLab\\tables\\meta.bin";
+extern const char metaPath[];
 
 typedef struct Meta {
     int lastIndex;

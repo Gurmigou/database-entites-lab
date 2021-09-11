@@ -8,6 +8,10 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
+  "C:/Users/Yehor/CLionProjects/databaseLab/entities/Customer.c" "C:/Users/Yehor/CLionProjects/databaseLab/cmake-build-debug/CMakeFiles/databaseLab.dir/entities/Customer.c.obj"
+  "C:/Users/Yehor/CLionProjects/databaseLab/entities/CustomerMetaEntity.c" "C:/Users/Yehor/CLionProjects/databaseLab/cmake-build-debug/CMakeFiles/databaseLab.dir/entities/CustomerMetaEntity.c.obj"
+  "C:/Users/Yehor/CLionProjects/databaseLab/entities/Review.c" "C:/Users/Yehor/CLionProjects/databaseLab/cmake-build-debug/CMakeFiles/databaseLab.dir/entities/Review.c.obj"
+  "C:/Users/Yehor/CLionProjects/databaseLab/entities/ReviewMetaEntity.c" "C:/Users/Yehor/CLionProjects/databaseLab/cmake-build-debug/CMakeFiles/databaseLab.dir/entities/ReviewMetaEntity.c.obj"
   "C:/Users/Yehor/CLionProjects/databaseLab/main.c" "C:/Users/Yehor/CLionProjects/databaseLab/cmake-build-debug/CMakeFiles/databaseLab.dir/main.c.obj"
   "C:/Users/Yehor/CLionProjects/databaseLab/src/CRUD.c" "C:/Users/Yehor/CLionProjects/databaseLab/cmake-build-debug/CMakeFiles/databaseLab.dir/src/CRUD.c.obj"
   "C:/Users/Yehor/CLionProjects/databaseLab/src/FileUtility.c" "C:/Users/Yehor/CLionProjects/databaseLab/cmake-build-debug/CMakeFiles/databaseLab.dir/src/FileUtility.c.obj"

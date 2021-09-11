@@ -2,6 +2,8 @@
 
 #include "MetaDB.h"
 
+const char metaPath[] = "C:\\Users\\Yehor\\CLionProjects\\databaseLab\\tables\\meta.bin";
+
 Meta* read() {
     FILE* file;
     file = fopen(metaPath, "rb");
