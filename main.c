@@ -1,15 +1,38 @@
 #include "src/CRUD.h"
 
 int main() {
-    Customer* customer = newCustomer("Yehor", "Bukh", "1 address");
-    CustomerMetaEntity* customerMeta = newCustomerMetaEntity(1, *customer);
+//    Customer* customer = newCustomer("Yehor", "Bukh", "999 address");
+//    CustomerMetaEntity* customerMeta = newCustomerMetaEntity(1, *customer);
+
+//    CustomerMetaEntity customerMeta1;
+//    printf("m: %d\n", readM(&customerMeta1, 1, NULL));
+
+//    updateM(customerMeta->pk, customerMeta);
+
+//    CustomerMetaEntity customerMeta2;
+//    printf("m: %d\n", readM(&customerMeta2, 1, NULL));
 
 //    createM(customerMeta);
-
-    Review* review = newReview("First review", "11-09-2021");
+//
+    Review* review = newReview("Updated review", "11-09-2021");
     ReviewMetaEntity* reviewMetaEntity = newReviewMetaEntity(1, *review);
 
-    createS(reviewMetaEntity, customerMeta->pk);
+    ReviewMetaEntity reviewMetaEntity1;
+    printf("m: %d\n", readS(&reviewMetaEntity1, 1, NULL));
+
+    updateS(1, reviewMetaEntity);
+
+    printf("m: %d\n", readS(&reviewMetaEntity1, 1, NULL));
+//
+//    int r = createS(reviewMetaEntity, 3);
+//    printf("%d\n", r);
+
+
+//    CustomerMetaEntity customerMeta;
+//    ReviewMetaEntity reviewMetaEntity1;
+//
+//    printf("m: %d\n", readM(&customerMeta, 1, NULL));
+//    printf("s: %d\n", readS(&reviewMetaEntity1, 0, NULL));
 
 //    sortIndexTable();
 

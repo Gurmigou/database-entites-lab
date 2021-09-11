@@ -14,14 +14,13 @@ extern const char customerPath[];
 extern const char reviewPath[];
 extern const char indexTablePath[];
 
-bool createM(struct CustomerMetaEntity* data);
-bool createS(struct ReviewMetaEntity* data, int fkValue);
+bool createM(CustomerMetaEntity* data);
+bool createS(ReviewMetaEntity* data, int fkValue);
 
 bool readM(CustomerMetaEntity* dest, int pk, int* index);
 bool readS(ReviewMetaEntity* dest, int pk, int* index);
 //void readAllWhere(void** destArr, bool (*predicate)(const void* e), FILE* file);
 
-//bool update(int pk, void (*consumer)(const void* e));
 bool updateM(int pk, CustomerMetaEntity* updateData);
 bool updateS(int pk, ReviewMetaEntity* updateData);
 

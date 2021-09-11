@@ -6,7 +6,10 @@ const char customerPath[] = "C:\\Users\\Yehor\\CLionProjects\\databaseLab\\table
 const char reviewPath[] = "C:\\Users\\Yehor\\CLionProjects\\databaseLab\\tables\\review.bin";
 const char indexTablePath[] = "C:\\Users\\Yehor\\CLionProjects\\databaseLab\\tables\\index-table.bin";
 
-bool createM(struct CustomerMetaEntity* data) {
+void writeToPosition(void* data, int pos, int dataSize, FILE* file);
+void readOnPosition(void* dest, int pos, int dataSize, FILE* file);
+
+bool createM(CustomerMetaEntity* data) {
     FILE* file;
     file = fopen(customerPath, "ab+");
 
@@ -15,7 +18,7 @@ bool createM(struct CustomerMetaEntity* data) {
     fwrite(data, sizeof(CustomerMetaEntity), 1, file);
     fclose(file);
 
-    struct IndexEntity indexEntity;
+    IndexEntity indexEntity;
     indexEntity.key = data->pk;
     indexEntity.addressIndex = dataIndex;
 
@@ -26,9 +29,10 @@ bool createM(struct CustomerMetaEntity* data) {
     return true;
 }
 
-bool createS(struct ReviewMetaEntity* data, int fkValue) {
+bool createS(ReviewMetaEntity* data, int fkValue) {
     CustomerMetaEntity customerMetaEntity;
-    bool successfullyRead = readM(&customerMetaEntity, fkValue,NULL);
+    int index;
+    bool successfullyRead = readM(&customerMetaEntity, fkValue, &index);
 
     if (!successfullyRead)
         return false;
@@ -41,12 +45,24 @@ bool createS(struct ReviewMetaEntity* data, int fkValue) {
     // means that there is no review records in the table
     if (customerMetaEntity.nextReviewIndex == -1) {
         customerMetaEntity.nextReviewIndex = dataIndex;
-        updateM(customerMetaEntity.pk, &customerMetaEntity);
+
+        FILE* customerFile;
+        customerFile = fopen(customerPath, "w+b");
+
+        writeToPosition(&customerMetaEntity, index * (int) sizeof(CustomerMetaEntity),
+                        sizeof(CustomerMetaEntity), customerFile);
+        fclose(customerFile);
     }
     else {
         ReviewMetaEntity lastReview = findLastReviewInChain(&customerMetaEntity);
         lastReview.nextReviewIndex = dataIndex;
-        updateS(lastReview.pk, &lastReview);
+
+        FILE* reviewFile;
+        reviewFile = fopen(customerPath, "w+b");
+
+        writeToPosition(&lastReview, index * (int) sizeof(ReviewMetaEntity),
+                        sizeof(CustomerMetaEntity), reviewFile);
+        fclose(reviewFile);
     }
 
     fwrite(data, sizeof(ReviewMetaEntity), 1, file);
@@ -55,6 +71,10 @@ bool createS(struct ReviewMetaEntity* data, int fkValue) {
     return true;
 }
 
+void readOnPosition(void* dest, int pos, int dataSize, FILE* file) {
+    fseek(file, pos * dataSize, SEEK_SET);
+    fread(dest, dataSize, 1, file);
+}
 
 bool readM(CustomerMetaEntity* dest, int pk, int* index) {
     FILE* file;
@@ -72,8 +92,10 @@ bool readM(CustomerMetaEntity* dest, int pk, int* index) {
     if (index != NULL)
         *index = fileIndex;
 
-    fseek(file, fileIndex * (int) sizeof(CustomerMetaEntity), SEEK_SET);
-    fread(dest, sizeof(CustomerMetaEntity), 1, file);
+//    fseek(file, fileIndex * (int) sizeof(CustomerMetaEntity), SEEK_SET);
+//    fread(dest, sizeof(CustomerMetaEntity), 1, file);
+
+    readOnPosition(dest, fileIndex * (int) sizeof(CustomerMetaEntity),sizeof(CustomerMetaEntity), file);
     fclose(file);
     return true;
 }
@@ -87,8 +109,9 @@ bool readS(ReviewMetaEntity* dest, int pk, int* index) {
     int curIndex = 0;
 
     while (curIndex < fileLength) {
-        fseek(file, curIndex * (int) sizeof(ReviewMetaEntity), SEEK_SET);
-        fread(&reviewMetaEntity, sizeof(ReviewMetaEntity), 1, file);
+        readOnPosition(&reviewMetaEntity, curIndex * (int) sizeof(ReviewMetaEntity), sizeof(ReviewMetaEntity), file);
+//        fseek(file, curIndex * (int) sizeof(ReviewMetaEntity), SEEK_SET);
+//        fread(&reviewMetaEntity, sizeof(ReviewMetaEntity), 1, file);
 
         if (reviewMetaEntity.pk == pk)
             break;
@@ -113,6 +136,11 @@ bool readS(ReviewMetaEntity* dest, int pk, int* index) {
     return true;
 }
 
+void writeToPosition(void* data, int pos, int dataSize, FILE* file) {
+    fseek(file, pos * dataSize, SEEK_SET);
+    fwrite(data, dataSize, 1, file);
+}
+
 bool updateM(int pk, CustomerMetaEntity* updateData) {
     CustomerMetaEntity customerMetaEntity;
     int dataIndex;
@@ -124,8 +152,8 @@ bool updateM(int pk, CustomerMetaEntity* updateData) {
     FILE* file;
     file = fopen(customerPath, "w+b");
 
-    fseek(file, dataIndex * (int) sizeof(CustomerMetaEntity), SEEK_SET);
-    fwrite(updateData, sizeof(CustomerMetaEntity), 1, file);
+    writeToPosition(updateData, dataIndex * (int) sizeof(CustomerMetaEntity),
+                    sizeof(CustomerMetaEntity), file);
 
     fclose(file);
     return true;
@@ -144,8 +172,8 @@ bool updateS(int pk, ReviewMetaEntity* updateData) {
     FILE* file;
     file = fopen(reviewPath, "w+b");
 
-    fseek(file, dataIndex * (int) sizeof(CustomerMetaEntity), SEEK_SET);
-    fwrite(updateData, sizeof(ReviewMetaEntity), 1, file);
+    writeToPosition(updateData, dataIndex * (int) sizeof(CustomerMetaEntity),
+                    sizeof(ReviewMetaEntity), file);
 
     fclose(file);
     return true;
