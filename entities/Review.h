@@ -11,9 +11,8 @@ typedef struct Review {
 
     // dd-mm-yyyy -> 10 bytes + '\0' = 11
     char createdData[11];
-    int customerId;
 } Review;
 
-Review* newReview(char text[512], char createdData[11], int customerId);
+Review* newReview(char text[512], char createdData[11]);
 
 #endif //DATABASELAB_REVIEW_H

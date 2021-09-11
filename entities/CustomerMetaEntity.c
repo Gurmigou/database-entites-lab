@@ -7,7 +7,7 @@ CustomerMetaEntity* newCustomerMetaEntity(int pk, Customer customer) {
     customerMetaEntity->pk = pk;
     customerMetaEntity->customer = customer;
     customerMetaEntity->deleted = false;
-    customerMetaEntity->nextReviewIndex = 0;
+    customerMetaEntity->nextReviewIndex = -1;
     customerMetaEntity->numOfReviews = 0;
     return customerMetaEntity;
 }

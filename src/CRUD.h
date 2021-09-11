@@ -12,15 +12,17 @@
 
 extern const char customerPath[];
 extern const char reviewPath[];
-extern const char mathTablePath[];
+extern const char indexTablePath[];
 
-void createM(struct CustomerMetaEntity* data);
-void createS(struct ReviewMetaEntity* data, int fkValue);
+bool createM(struct CustomerMetaEntity* data);
+bool createS(struct ReviewMetaEntity* data, int fkValue);
 
-void read(void* dest, int id, FILE* file);
-void readAllWhere(void** destArr, bool (*predicate)(const void* e), FILE* file);
+bool readM(CustomerMetaEntity* dest, int pk, int* index);
+bool readS(ReviewMetaEntity* dest, int pk, int* index);
+//void readAllWhere(void** destArr, bool (*predicate)(const void* e), FILE* file);
 
-void update(int pkValue, void (*consumer)(const void* e));
-
+//bool update(int pk, void (*consumer)(const void* e));
+bool updateM(int pk, CustomerMetaEntity* updateData);
+bool updateS(int pk, ReviewMetaEntity* updateData);
 
 #endif //DATABASELAB_CRUD_H

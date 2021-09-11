@@ -34,7 +34,12 @@ CMakeFiles/databaseLab.dir/src/CRUD.c.obj: \
  ../src/CRUD.h \
  ../src/FileUtility.h
 CMakeFiles/databaseLab.dir/src/FileUtility.c.obj: \
+ ../entities/Customer.h \
+ ../entities/CustomerMetaEntity.h \
  ../entities/IndexEntity.h \
+ ../entities/Review.h \
+ ../entities/ReviewMetaEntity.h \
+ ../src/CRUD.h \
  ../src/FileUtility.c \
  ../src/FileUtility.h
 CMakeFiles/databaseLab.dir/src/MetaDB.c.obj: \
