@@ -2,10 +2,12 @@
 
 #include "ReviewMetaEntity.h"
 
-ReviewMetaEntity* newReviewMetaEntity(int pk, Review review) {
+ReviewMetaEntity* newReviewMetaEntity(int pk, int fk, Review review) {
     struct ReviewMetaEntity* reviewMetaEntity = malloc(sizeof(ReviewMetaEntity));
     reviewMetaEntity->pk = pk;
+    reviewMetaEntity->fk = fk;
     reviewMetaEntity->review = review;
-    reviewMetaEntity->nextReviewIndex = 0;
+    reviewMetaEntity->nextReviewIndex = -1;
+    reviewMetaEntity->deleted = false;
     return reviewMetaEntity;
 }

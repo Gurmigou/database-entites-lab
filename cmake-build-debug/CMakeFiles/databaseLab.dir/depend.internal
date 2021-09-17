@@ -24,6 +24,7 @@ CMakeFiles/databaseLab.dir/main.c.obj
  C:/Users/Yehor/CLionProjects/databaseLab/main.c
  C:/Users/Yehor/CLionProjects/databaseLab/src/CRUD.h
  C:/Users/Yehor/CLionProjects/databaseLab/src/FileUtility.h
+ C:/Users/Yehor/CLionProjects/databaseLab/src/MetaDB.h
 CMakeFiles/databaseLab.dir/src/CRUD.c.obj
  C:/Users/Yehor/CLionProjects/databaseLab/entities/Customer.h
  C:/Users/Yehor/CLionProjects/databaseLab/entities/CustomerMetaEntity.h
@@ -33,6 +34,7 @@ CMakeFiles/databaseLab.dir/src/CRUD.c.obj
  C:/Users/Yehor/CLionProjects/databaseLab/src/CRUD.c
  C:/Users/Yehor/CLionProjects/databaseLab/src/CRUD.h
  C:/Users/Yehor/CLionProjects/databaseLab/src/FileUtility.h
+ C:/Users/Yehor/CLionProjects/databaseLab/src/MetaDB.h
 CMakeFiles/databaseLab.dir/src/FileUtility.c.obj
  C:/Users/Yehor/CLionProjects/databaseLab/entities/Customer.h
  C:/Users/Yehor/CLionProjects/databaseLab/entities/CustomerMetaEntity.h
@@ -42,6 +44,7 @@ CMakeFiles/databaseLab.dir/src/FileUtility.c.obj
  C:/Users/Yehor/CLionProjects/databaseLab/src/CRUD.h
  C:/Users/Yehor/CLionProjects/databaseLab/src/FileUtility.c
  C:/Users/Yehor/CLionProjects/databaseLab/src/FileUtility.h
+ C:/Users/Yehor/CLionProjects/databaseLab/src/MetaDB.h
 CMakeFiles/databaseLab.dir/src/MetaDB.c.obj
  C:/Users/Yehor/CLionProjects/databaseLab/src/MetaDB.c
  C:/Users/Yehor/CLionProjects/databaseLab/src/MetaDB.h

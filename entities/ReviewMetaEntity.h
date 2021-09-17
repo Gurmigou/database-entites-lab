@@ -7,10 +7,12 @@
 
 typedef struct ReviewMetaEntity {
     int pk;
+    int fk;
     Review review;
     int nextReviewIndex;
+    bool deleted;
 } ReviewMetaEntity;
 
-ReviewMetaEntity* newReviewMetaEntity(int pk, Review review);
+ReviewMetaEntity* newReviewMetaEntity(int pk, int fk, Review review);
 
 #endif //DATABASELAB_REVIEWMETAENTITY_H

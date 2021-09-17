@@ -8,22 +8,8 @@
 
 extern const char metaPath[];
 
-typedef struct Meta {
-    int lastIndex;
-    int realSize;
-    int numDeleted;
-} Meta;
-
-void incrementLastIndex();
-void setLastIndex(int lastIndex);
-
-void incrementRealSize();
-void setRealSize(int realSize);
-
 void incrementNumDeleted();
 void setNumDeleted(int numDeleted);
-
-Meta* read();
-void write(Meta* meta);
+int getNumDeleted();
 
 #endif //DATABASELAB_METADB_H

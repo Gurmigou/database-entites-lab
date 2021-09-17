@@ -17,10 +17,28 @@ int getFileByteLength(FILE* file) {
     return length;
 }
 
+int getNextDataIndex(FILE* file, int sizeofData) {
+    return getFileByteLength(file) / sizeofData;
+}
+
 int indexEntityComparator(const void* e1, const void* e2) {
     IndexEntity* elem1 = (IndexEntity*) e1;
     IndexEntity* elem2 = (IndexEntity*) e2;
     return (elem1->key < elem2->key) ? -1 : (elem1->key > elem2->key) ? 1 : 0;
+}
+
+void writeToPosition(void* data, int pos, int dataSize, FILE* file) {
+    fseek(file, pos * dataSize, SEEK_SET);
+    fwrite(data, dataSize, 1, file);
+}
+
+void readOnPosition(void* dest, int pos, int dataSize, FILE* file) {
+    fseek(file, pos * dataSize, SEEK_SET);
+    fread(dest, dataSize, 1, file);
+}
+
+void sortIndexTableRam(IndexEntity* arr, int length) {
+    qsort(arr, length,sizeof(IndexEntity), indexEntityComparator);
 }
 
 void sortIndexTable() {
@@ -32,11 +50,6 @@ void sortIndexTable() {
 
     // read elements from file
     fread(indexEntityArray, sizeof(IndexEntity), numberOfElements, file);
-
-    for (int i = 0; i < numberOfElements; ++i) {
-        IndexEntity entity = indexEntityArray[i];
-        int a = 5;
-    }
 
     // sort elements
     qsort(indexEntityArray, numberOfElements,
@@ -56,8 +69,10 @@ void sortIndexTable() {
 
 // Uses binary search
 int findFileIndexByPK(int pk) {
-    FILE* file;
-    file = fopen(indexTablePath, "ab+");
+    if (pk < 0)
+        return - 1;
+
+    FILE* file = fopen(indexTablePath, "ab+");
 
     int left = 0;
     int right = getFileByteLength(file) / (int) sizeof(IndexEntity);
@@ -65,10 +80,8 @@ int findFileIndexByPK(int pk) {
     while (left <= right) {
         int mid = (left + right) / 2;
 
-        fseek(file, mid * (int) sizeof(IndexEntity), SEEK_SET);
-
         IndexEntity indexEntity;
-        fread(&indexEntity, sizeof(IndexEntity), 1, file);
+        readOnPosition(&indexEntity, mid, sizeof(IndexEntity), file);
 
         if (indexEntity.key == pk) {
             fclose(file);
@@ -85,44 +98,97 @@ int findFileIndexByPK(int pk) {
     return -1;
 }
 
-ReviewMetaEntity findLastReviewInChain(CustomerMetaEntity* firstIndex) {
-    int next = firstIndex->nextReviewIndex * (int) sizeof(ReviewMetaEntity);
-
-    FILE* file;
-    file = fopen(reviewPath, "rb");
+ReviewMetaEntity findLastReviewInChain(CustomerMetaEntity* firstIndex, int* index) {
+    FILE* file = fopen(reviewPath, "rb");
+    int next = firstIndex->nextReviewIndex;
+    int prev = -1;
 
     ReviewMetaEntity reviewMetaEntity;
     while (next >= 0) {
-        fread(&reviewMetaEntity, sizeof(ReviewMetaEntity), 1, file);
-        next = reviewMetaEntity.nextReviewIndex * (int) sizeof(ReviewMetaEntity);
+        readOnPosition(&reviewMetaEntity, next, sizeof(ReviewMetaEntity), file);
+        prev = next;
+        next = reviewMetaEntity.nextReviewIndex;
     }
+
+    if (index != NULL)
+        *index = prev;
 
     fclose(file);
     return reviewMetaEntity;
 }
 
-bool chainSearchByPK(CustomerMetaEntity* firstIndex, int pk, ReviewMetaEntity* dest) {
-    int next = firstIndex->nextReviewIndex * (int) sizeof(ReviewMetaEntity);
+bool deleteAllReviewsChain(CustomerMetaEntity* firstIndex) {
+    int next = firstIndex->nextReviewIndex;
 
     FILE* file;
-    file = fopen(reviewPath, "rb");
+    file = fopen(reviewPath, "r+b");
 
     ReviewMetaEntity reviewMetaEntity;
     while (next >= 0) {
-        fread(&reviewMetaEntity, sizeof(ReviewMetaEntity), 1, file);
+        readOnPosition(&reviewMetaEntity, next, sizeof(ReviewMetaEntity), file);
+        reviewMetaEntity.deleted = true;
 
-        if (reviewMetaEntity.pk == pk) {
-            dest->review = reviewMetaEntity.review;
-            dest->pk = reviewMetaEntity.pk;
-            dest->nextReviewIndex = reviewMetaEntity.nextReviewIndex;
-
-            fclose(file);
-            return true;
-        }
-
-        next = reviewMetaEntity.nextReviewIndex * (int) sizeof(ReviewMetaEntity);
+        writeToPosition(&reviewMetaEntity, next, sizeof(ReviewMetaEntity), file);
+        next = reviewMetaEntity.nextReviewIndex;
     }
 
     fclose(file);
     return false;
+}
+
+void copyReviewData(ReviewMetaEntity* source, ReviewMetaEntity* dest) {
+    dest->nextReviewIndex = source->nextReviewIndex;
+    dest->deleted = source->deleted;
+    dest->pk = source->pk;
+    dest->fk = source->fk;
+    dest->review = source->review;
+}
+
+bool deleteReview(CustomerMetaEntity* firstIndex, int pkDelete)
+{
+    int next = firstIndex->nextReviewIndex;
+
+    // record
+    if (next < 0) return false;
+
+    FILE* file = fopen(reviewPath, "r+b");
+
+    ReviewMetaEntity prevEntity;
+    ReviewMetaEntity curEntity;
+
+    bool first = true;
+    int prev = -1;
+
+    while (next >= 0) {
+        readOnPosition(&curEntity, next, sizeof(ReviewMetaEntity), file);
+
+        if (curEntity.pk == pkDelete) {
+            // next after current entity
+            int nextNext = curEntity.nextReviewIndex;
+
+            if (first) {
+                if (nextNext == -1)
+                    firstIndex->nextReviewIndex = -1;
+                else
+                    firstIndex->nextReviewIndex = nextNext;
+            } else {
+                if (nextNext == -1)
+                    prevEntity.nextReviewIndex = -1;
+                else
+                    prevEntity.nextReviewIndex = nextNext;
+                writeToPosition(&prevEntity, prev, sizeof(ReviewMetaEntity), file);
+            }
+            curEntity.deleted = true;
+            writeToPosition(&curEntity, next, sizeof(ReviewMetaEntity), file);
+            break;
+        }
+
+        copyReviewData(&curEntity, &prevEntity);
+        first = false;
+        prev = next;
+        next = curEntity.nextReviewIndex;
+    }
+
+    fclose(file);
+    return next >= 0;
 }

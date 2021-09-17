@@ -5,6 +5,7 @@
 
 #include "stdio.h"
 
+#include "MetaDB.h"
 #include "FileUtility.h"
 #include "../entities/CustomerMetaEntity.h"
 #include "../entities/ReviewMetaEntity.h"
@@ -14,8 +15,10 @@ extern const char customerPath[];
 extern const char reviewPath[];
 extern const char indexTablePath[];
 
+void runDataBase();
+
 bool createM(CustomerMetaEntity* data);
-bool createS(ReviewMetaEntity* data, int fkValue);
+bool createS(ReviewMetaEntity* data);
 
 bool readM(CustomerMetaEntity* dest, int pk, int* index);
 bool readS(ReviewMetaEntity* dest, int pk, int* index);
@@ -23,5 +26,8 @@ bool readS(ReviewMetaEntity* dest, int pk, int* index);
 
 bool updateM(int pk, CustomerMetaEntity* updateData);
 bool updateS(int pk, ReviewMetaEntity* updateData);
+
+bool deleteM(int pk);
+bool deleteS(int pk);
 
 #endif //DATABASELAB_CRUD_H

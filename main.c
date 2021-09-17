@@ -1,52 +1,38 @@
 #include "src/CRUD.h"
 
 int main() {
-//    Customer* customer = newCustomer("Yehor", "Bukh", "999 address");
-//    CustomerMetaEntity* customerMeta = newCustomerMetaEntity(1, *customer);
-
-//    CustomerMetaEntity customerMeta1;
-//    printf("m: %d\n", readM(&customerMeta1, 1, NULL));
-
-//    updateM(customerMeta->pk, customerMeta);
-
-//    CustomerMetaEntity customerMeta2;
-//    printf("m: %d\n", readM(&customerMeta2, 1, NULL));
-
-//    createM(customerMeta);
-//
-    Review* review = newReview("Updated review", "11-09-2021");
-    ReviewMetaEntity* reviewMetaEntity = newReviewMetaEntity(1, *review);
-
-    ReviewMetaEntity reviewMetaEntity1;
-    printf("m: %d\n", readS(&reviewMetaEntity1, 1, NULL));
-
-    updateS(1, reviewMetaEntity);
-
-    printf("m: %d\n", readS(&reviewMetaEntity1, 1, NULL));
-//
-//    int r = createS(reviewMetaEntity, 3);
-//    printf("%d\n", r);
+    runDataBase();
 
 
-//    CustomerMetaEntity customerMeta;
-//    ReviewMetaEntity reviewMetaEntity1;
-//
-//    printf("m: %d\n", readM(&customerMeta, 1, NULL));
-//    printf("s: %d\n", readS(&reviewMetaEntity1, 0, NULL));
+    char command[20] = "";
+    while (1){
+        printf("\nEnter the command or 'q':");
+        scanf("%s", command);
 
-//    sortIndexTable();
+        if (strcmp(command, "q") == 0) break;
 
-//    int value = findFileIndexOfPK(-1);
-//    printf("%d", value);
+        else if (strcmp(command, "get-m") == 0)
+            getM();
+        else if (strcmp(command, "get-s") == 0)
+            getS();
 
-//    CustomerMetaEntity read;
-//    IndexEntity indexEntityRead;
-//
-//    FILE* file;
-//    file = fopen(indexTablePath, "rb");
-//
-//    fread(&indexEntityRead, sizeof (IndexEntity), 1, file);
-//    int a = 5;
+        else if (strcmp(command, "insert-m") == 0)
+            insertM();
+        else if (strcmp(command, "insert-s") == 0)
+            insertS();
+
+        else if (strcmp(command, "update-m") == 0)
+            updateM();
+        else if (strcmp(command, "update-s") == 0)
+            updateS();
+
+        else if (strcmp(command, "delete-m") == 0)
+            deleteM();
+        else if (strcmp(command, "delete-s") == 0)
+            deleteS();
+
+        else printf("Unknown command !\n");
+    }
 
     return 0;
 }

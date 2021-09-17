@@ -23,7 +23,8 @@ CMakeFiles/databaseLab.dir/main.c.obj: \
  ../entities/ReviewMetaEntity.h \
  ../main.c \
  ../src/CRUD.h \
- ../src/FileUtility.h
+ ../src/FileUtility.h \
+ ../src/MetaDB.h
 CMakeFiles/databaseLab.dir/src/CRUD.c.obj: \
  ../entities/Customer.h \
  ../entities/CustomerMetaEntity.h \
@@ -32,7 +33,8 @@ CMakeFiles/databaseLab.dir/src/CRUD.c.obj: \
  ../entities/ReviewMetaEntity.h \
  ../src/CRUD.c \
  ../src/CRUD.h \
- ../src/FileUtility.h
+ ../src/FileUtility.h \
+ ../src/MetaDB.h
 CMakeFiles/databaseLab.dir/src/FileUtility.c.obj: \
  ../entities/Customer.h \
  ../entities/CustomerMetaEntity.h \
@@ -41,7 +43,8 @@ CMakeFiles/databaseLab.dir/src/FileUtility.c.obj: \
  ../entities/ReviewMetaEntity.h \
  ../src/CRUD.h \
  ../src/FileUtility.c \
- ../src/FileUtility.h
+ ../src/FileUtility.h \
+ ../src/MetaDB.h
 CMakeFiles/databaseLab.dir/src/MetaDB.c.obj: \
  ../src/MetaDB.c \
  ../src/MetaDB.h
