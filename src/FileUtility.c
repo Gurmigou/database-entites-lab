@@ -1,14 +1,6 @@
 // Created by Yehor on 08.09.2021.
 #include "FileUtility.h"
 
-bool isOpen(FILE* file) {
-    return file != NULL;
-}
-
-bool fileIsEmpty(FILE* file) {
-    return getFileByteLength(file) == 0;
-}
-
 int getFileByteLength(FILE* file) {
     long curPos = ftell(file);
     fseek(file, 0L, SEEK_END);
@@ -38,7 +30,7 @@ void readOnPosition(void* dest, int pos, int dataSize, FILE* file) {
 }
 
 void sortIndexTableRam(IndexEntity* arr, int length) {
-    qsort(arr, length,sizeof(IndexEntity), indexEntityComparator);
+    qsort(arr, length, sizeof(IndexEntity), indexEntityComparator);
 }
 
 void sortIndexTable() {
@@ -67,34 +59,49 @@ void sortIndexTable() {
     fclose(file);
 }
 
-// Uses binary search
-int findFileIndexByPK(int pk) {
+int linearSearchHelper(IndexEntity* arr, const int maxLeft, const int maxRight, int mid, int pk) {
+    int i = mid - 1;
+    while (i >= maxLeft && arr[i].key == pk) {
+        if (!arr[i].deleted)
+            return arr[i].addressIndex;
+        i--;
+    }
+    i = mid + 1;
+    while (i <= maxRight && arr[i].key == pk) {
+        if (!arr[i].deleted)
+            return arr[i].addressIndex;
+        i++;
+    }
+    return -1;
+}
+
+int findFileIndexByPkRam(IndexEntity* arr, int length, int pk, bool toDelete) {
     if (pk < 0)
         return - 1;
 
-    FILE* file = fopen(indexTablePath, "ab+");
-
     int left = 0;
-    int right = getFileByteLength(file) / (int) sizeof(IndexEntity);
+    int right = length - 1;
 
     while (left <= right) {
+        printf("left: %d, right: %d FUCK\n", left, right);
+
         int mid = (left + right) / 2;
 
-        IndexEntity indexEntity;
-        readOnPosition(&indexEntity, mid, sizeof(IndexEntity), file);
+        if (arr[mid].key == pk) {
+            if (arr[mid].deleted)
+                return linearSearchHelper(arr, 0, length - 1, mid, pk);
 
-        if (indexEntity.key == pk) {
-            fclose(file);
-            return indexEntity.addressIndex;
+            if (toDelete)
+                arr[mid].deleted = true;
+
+            return arr[mid].addressIndex;
         }
 
-        if (indexEntity.key < pk)
+        if (arr[mid].key < pk)
             left = mid + 1;
         else
             right = mid - 1;
     }
-
-    fclose(file);
     return -1;
 }
 
@@ -191,4 +198,61 @@ bool deleteReview(CustomerMetaEntity* firstIndex, int pkDelete)
 
     fclose(file);
     return next >= 0;
+}
+
+bool customerIsDeleted(void* element) {
+    CustomerMetaEntity* customerMetaEntity = (CustomerMetaEntity*) element;
+    return customerMetaEntity->deleted;
+}
+
+bool reviewIsDeleted(void* element) {
+    ReviewMetaEntity* reviewMetaEntity = (ReviewMetaEntity*) element;
+    return reviewMetaEntity->deleted;
+}
+
+bool indexIsDeleted(void* element) {
+    IndexEntity* indexEntity = (IndexEntity*) element;
+    return indexEntity->deleted;
+}
+
+void rewriteWithoutDeletedElements(const char* fileName, int sizeofData, void* tmpBuffer, bool(*isDeletedFilter)(void* element)) {
+    FILE* source = fopen(fileName, "rb");
+    int elements = getNextDataIndex(source, sizeofData);
+
+    char tmpPath[100];
+    strcpy(tmpPath, absolutePath);
+    strcat(tmpPath, "tmp.bin");
+
+    FILE* destination = fopen(tmpPath, "w+b");
+
+    int position = 0;
+    for (int i = 0; i < elements; ++i) {
+        readOnPosition(tmpBuffer, i, sizeofData, source);
+        if (!isDeletedFilter(tmpBuffer)) {
+            writeToPosition(tmpBuffer, position, sizeofData, destination);
+            position++;
+        }
+    }
+
+    fclose(source);
+    fclose(destination);
+
+    // delete the previous file
+    remove(fileName);
+    // rename the new file
+    rename(tmpPath, fileName);
+}
+
+void rewriteIndexTable(IndexEntity* arr, int length) {
+    FILE* file = fopen(indexTablePath, "w+b");
+
+    int position = 0;
+    for (int i = 0; i < length; ++i) {
+        if (!arr[i].deleted) {
+            writeToPosition(&arr[i], position, sizeof(IndexEntity), file);
+            position++;
+        }
+    }
+
+    fclose(file);
 }

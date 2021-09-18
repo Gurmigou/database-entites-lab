@@ -11,3 +11,11 @@ ReviewMetaEntity* newReviewMetaEntity(int pk, int fk, Review review) {
     reviewMetaEntity->deleted = false;
     return reviewMetaEntity;
 }
+
+void printReview(ReviewMetaEntity* r) {
+    printf("Review text: ");
+    printf("%s\n", r->review.text);
+
+    printf("Creation data: ");
+    printf("%s\n", r->review.createdData);
+}

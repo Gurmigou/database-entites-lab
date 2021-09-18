@@ -5,11 +5,56 @@
 const char customerPath[] = "C:\\Users\\Yehor\\CLionProjects\\databaseLab\\tables\\customer.bin";
 const char reviewPath[] = "C:\\Users\\Yehor\\CLionProjects\\databaseLab\\tables\\review.bin";
 const char indexTablePath[] = "C:\\Users\\Yehor\\CLionProjects\\databaseLab\\tables\\index-table.bin";
+const char absolutePath[] = "C:\\Users\\Yehor\\CLionProjects\\databaseLab\\tables\\";
+
+IndexEntity* indexEntityArray;
+int numberOfIndexEntityElements;
+
+int masterNumDeleted;
+int slaveNumDeleted;
+
+void addIndexEntity(IndexEntity newEntity) {
+    IndexEntity* tmpArr = malloc((numberOfIndexEntityElements + 1) * sizeof(IndexEntity));
+    for (int i = 0; i < numberOfIndexEntityElements; ++i)
+        tmpArr[i] = indexEntityArray[i];
+    tmpArr[numberOfIndexEntityElements] = newEntity;
+
+    free(indexEntityArray);
+    indexEntityArray = tmpArr;
+    numberOfIndexEntityElements++;
+}
+
+void runDataBase() {
+    FILE* file = fopen(indexTablePath, "rb");
+    numberOfIndexEntityElements = getFileByteLength(file) / (int) sizeof(IndexEntity);
+    indexEntityArray = malloc(numberOfIndexEntityElements * sizeof(IndexEntity));
+
+    // read elements from file
+    fread(indexEntityArray, sizeof(IndexEntity), numberOfIndexEntityElements, file);
+    fclose(file);
+
+    sortIndexTableRam(indexEntityArray, numberOfIndexEntityElements);
+
+    masterNumDeleted = 0;
+    slaveNumDeleted = 0;
+}
+
+void stopDataBase() {
+    CustomerMetaEntity customerBuffer;
+    ReviewMetaEntity reviewBuffer;
+
+//    rewriteWithoutDeletedElements(customerPath, sizeof(CustomerMetaEntity), &customerBuffer, customerIsDeleted);
+//    rewriteWithoutDeletedElements(reviewPath, sizeof(ReviewMetaEntity), &reviewBuffer, reviewIsDeleted);
+    rewriteIndexTable(indexEntityArray, numberOfIndexEntityElements);
+
+    // delete an array
+    free(indexEntityArray);
+}
 
 bool createM(CustomerMetaEntity* data) {
     CustomerMetaEntity tmp;
     // if the record already exists, update it
-    if (readM(&tmp, data->pk, NULL) && !tmp.deleted)
+    if (readM(&tmp, data->pk, NULL, false) && !tmp.deleted)
         return updateM(data->pk, data);
 
     FILE* file = fopen(customerPath, "ab+");
@@ -22,9 +67,9 @@ bool createM(CustomerMetaEntity* data) {
     IndexEntity indexEntity;
     indexEntity.key = data->pk;
     indexEntity.addressIndex = dataIndex;
+    indexEntity.deleted = false;
 
-    file = fopen(indexTablePath, "ab+");
-    fwrite(&indexEntity, sizeof (IndexEntity), 1, file);
+    addIndexEntity(indexEntity);
 
     fclose(file);
     return true;
@@ -38,7 +83,7 @@ bool createS(ReviewMetaEntity* data) {
 
     CustomerMetaEntity customerMetaEntity;
     int customerIndex;
-    bool successfullyRead = readM(&customerMetaEntity, data->fk, &customerIndex);
+    bool successfullyRead = readM(&customerMetaEntity, data->fk, &customerIndex, false);
 
     if (!successfullyRead)
         return false;
@@ -72,11 +117,10 @@ bool createS(ReviewMetaEntity* data) {
     return true;
 }
 
-bool readM(CustomerMetaEntity* dest, int pk, int* index) {
-    // sort elements in the index table
-    sortIndexTable();
-    // binary search
-    int recordIndex = findFileIndexByPK(pk);
+bool readM(CustomerMetaEntity* dest, int pk, int* index, bool toDelete) {
+    sortIndexTableRam(indexEntityArray, numberOfIndexEntityElements);
+
+    int recordIndex = findFileIndexByPkRam(indexEntityArray, numberOfIndexEntityElements, pk, toDelete);
 
     if (recordIndex == -1)
         return false;
@@ -133,7 +177,7 @@ bool readS(ReviewMetaEntity* dest, int pk, int* index) {
 bool updateM(int pk, CustomerMetaEntity* updateData) {
     CustomerMetaEntity customerMetaEntity;
     int dataIndex;
-    bool successfullyRead = readM(&customerMetaEntity, pk, &dataIndex);
+    bool successfullyRead = readM(&customerMetaEntity, pk, &dataIndex, false);
 
     if (!successfullyRead || customerMetaEntity.pk != updateData->pk)
         return false;
@@ -170,7 +214,9 @@ bool updateS(int pk, ReviewMetaEntity* updateData) {
 bool deleteM(int pk) {
     CustomerMetaEntity customerMetaEntity;
     int dataIndex;
-    bool successfullyRead = readM(&customerMetaEntity, pk, &dataIndex);
+
+    // IndexEntity will be marked as deleted in the "readM" function
+    bool successfullyRead = readM(&customerMetaEntity, pk, &dataIndex, true);
 
     if (!successfullyRead)
         return false;
@@ -183,9 +229,7 @@ bool deleteM(int pk) {
     customerMetaEntity.deleted = true;
     writeToPosition(&customerMetaEntity, dataIndex, sizeof(CustomerMetaEntity), file);
 
-    // meta information
-    incrementNumDeleted();
-
+    masterNumDeleted++;
     fclose(file);
     return true;
 }
@@ -199,7 +243,7 @@ bool deleteS(int pk) {
 
     CustomerMetaEntity customerMetaEntity;
     int customerIndex;
-    readM(&customerMetaEntity, reviewMetaEntity.fk, &customerIndex);
+    readM(&customerMetaEntity, reviewMetaEntity.fk, &customerIndex, false);
 
     bool successfullyDeleted = deleteReview(&customerMetaEntity, reviewMetaEntity.pk);
 
@@ -209,17 +253,33 @@ bool deleteS(int pk) {
     FILE* file = fopen(customerPath, "r+b");
     customerMetaEntity.numOfReviews--;
     writeToPosition(&customerMetaEntity, customerIndex, sizeof(CustomerMetaEntity), file);
+
+    slaveNumDeleted++;
     fclose(file);
-
-    // meta information
-    incrementNumDeleted();
-    incrementNumDeleted();
-
-    int v = getNumDeleted();
-
-    setNumDeleted(99);
-
-    int v1 = getNumDeleted();
-
     return true;
+}
+
+int countM() {
+    FILE* file = fopen(customerPath, "rb");
+    int count = getNextDataIndex(file, sizeof(CustomerMetaEntity)) - masterNumDeleted;
+    fclose(file);
+    return count;
+}
+
+int countS() {
+    FILE* file = fopen(reviewPath, "rb");
+    int count = getNextDataIndex(file, sizeof(ReviewMetaEntity)) - slaveNumDeleted;
+    fclose(file);
+    return count;
+}
+
+int countSWhichDependFromM(int masterPk) {
+    FILE* file = fopen(customerPath, "rb");
+
+    CustomerMetaEntity customerMetaEntity;
+    if (!readM(&customerMetaEntity, masterPk, NULL, false))
+        return -1;
+
+    fclose(file);
+    return customerMetaEntity.numOfReviews;
 }

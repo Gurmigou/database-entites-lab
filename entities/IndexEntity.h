@@ -6,6 +6,7 @@
 typedef struct IndexEntity {
     int key;
     int addressIndex;
+    bool deleted;
 } IndexEntity;
 
 #endif //DATABASELAB_INDEXENTITY_H

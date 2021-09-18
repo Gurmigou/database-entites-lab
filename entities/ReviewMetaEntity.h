@@ -15,4 +15,6 @@ typedef struct ReviewMetaEntity {
 
 ReviewMetaEntity* newReviewMetaEntity(int pk, int fk, Review review);
 
+void printReview(ReviewMetaEntity* r);
+
 #endif //DATABASELAB_REVIEWMETAENTITY_H

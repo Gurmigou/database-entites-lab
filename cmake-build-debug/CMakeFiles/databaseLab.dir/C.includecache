@@ -11,6 +11,8 @@ malloc.h
 -
 string.h
 -
+stdio.h
+-
 
 C:/Users/Yehor/CLionProjects/databaseLab/entities/CustomerMetaEntity.h
 stdbool.h
@@ -27,10 +29,16 @@ string.h
 -
 stdbool.h
 -
+stdio.h
+-
 
 C:/Users/Yehor/CLionProjects/databaseLab/entities/ReviewMetaEntity.h
 Review.h
 C:/Users/Yehor/CLionProjects/databaseLab/entities/Review.h
+
+C:/Users/Yehor/CLionProjects/databaseLab/main.c
+src/CRUD.h
+C:/Users/Yehor/CLionProjects/databaseLab/src/CRUD.h
 
 C:/Users/Yehor/CLionProjects/databaseLab/src/CRUD.c
 CRUD.h
@@ -50,6 +58,10 @@ C:/Users/Yehor/CLionProjects/databaseLab/entities/ReviewMetaEntity.h
 ../entities/IndexEntity.h
 C:/Users/Yehor/CLionProjects/databaseLab/entities/IndexEntity.h
 
+C:/Users/Yehor/CLionProjects/databaseLab/src/FileUtility.c
+FileUtility.h
+C:/Users/Yehor/CLionProjects/databaseLab/src/FileUtility.h
+
 C:/Users/Yehor/CLionProjects/databaseLab/src/FileUtility.h
 stdlib.h
 -
@@ -65,10 +77,6 @@ C:/Users/Yehor/CLionProjects/databaseLab/entities/IndexEntity.h
 C:/Users/Yehor/CLionProjects/databaseLab/entities/CustomerMetaEntity.h
 ../entities/ReviewMetaEntity.h
 C:/Users/Yehor/CLionProjects/databaseLab/entities/ReviewMetaEntity.h
-
-C:/Users/Yehor/CLionProjects/databaseLab/src/MetaDB.c
-MetaDB.h
-C:/Users/Yehor/CLionProjects/databaseLab/src/MetaDB.h
 
 C:/Users/Yehor/CLionProjects/databaseLab/src/MetaDB.h
 stdio.h

@@ -5,6 +5,7 @@
 
 #include <malloc.h>
 #include <string.h>
+#include <stdio.h>
 
 typedef struct Customer {
     char firstName[64];

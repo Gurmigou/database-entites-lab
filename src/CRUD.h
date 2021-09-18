@@ -14,20 +14,27 @@
 extern const char customerPath[];
 extern const char reviewPath[];
 extern const char indexTablePath[];
+extern const char absolutePath[];
 
 void runDataBase();
+void stopDataBase();
 
 bool createM(CustomerMetaEntity* data);
 bool createS(ReviewMetaEntity* data);
 
-bool readM(CustomerMetaEntity* dest, int pk, int* index);
+bool readM(CustomerMetaEntity* dest, int pk, int* index, bool toDelete);
 bool readS(ReviewMetaEntity* dest, int pk, int* index);
-//void readAllWhere(void** destArr, bool (*predicate)(const void* e), FILE* file);
 
 bool updateM(int pk, CustomerMetaEntity* updateData);
 bool updateS(int pk, ReviewMetaEntity* updateData);
 
 bool deleteM(int pk);
 bool deleteS(int pk);
+
+int countM();
+int countS();
+int countSWhichDependFromM(int masterPk);
+
+void addIndexEntity(IndexEntity newEntity);
 
 #endif //DATABASELAB_CRUD_H

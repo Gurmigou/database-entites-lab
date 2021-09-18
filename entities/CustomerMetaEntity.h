@@ -15,4 +15,6 @@ typedef struct CustomerMetaEntity {
 
 CustomerMetaEntity* newCustomerMetaEntity(int pk, Customer customer);
 
+void printCustomer(CustomerMetaEntity* c);
+
 #endif //DATABASELAB_CUSTOMERMETAENTITY_H

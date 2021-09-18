@@ -11,3 +11,14 @@ CustomerMetaEntity* newCustomerMetaEntity(int pk, Customer customer) {
     customerMetaEntity->numOfReviews = 0;
     return customerMetaEntity;
 }
+
+void printCustomer(CustomerMetaEntity* c) {
+    printf("First name: ");
+    printf("%s\n", c->customer.firstName);
+
+    printf("Last name: ");
+    printf("%s\n", c->customer.lastName);
+
+    printf("Address: ");
+    printf("%s\n", c->customer.address);
+}

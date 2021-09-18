@@ -6,6 +6,7 @@
 #include <malloc.h>
 #include <string.h>
 #include <stdbool.h>
+#include <stdio.h>
 
 typedef struct Review {
     char text[512];
