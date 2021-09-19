@@ -8,8 +8,12 @@
 
 extern const char metaPath[];
 
-void incrementNumDeleted();
-void setNumDeleted(int numDeleted);
-int getNumDeleted();
+typedef struct Pair {
+    int masterNumDeleted;
+    int slaveNumDeleted;
+} Pair;
+
+void setNumDeleted(int masterNumDeleted, int slaveNumDeleted);
+void getNumDeleted(int* masterNumDeleted, int* slaveNumDeleted);
 
 #endif //DATABASELAB_METADB_H

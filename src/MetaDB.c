@@ -4,21 +4,22 @@
 
 const char metaPath[] = "C:\\Users\\Yehor\\CLionProjects\\databaseLab\\tables\\meta.bin";
 
-void incrementNumDeleted() {
-    int deleted = getNumDeleted();
-    setNumDeleted(deleted + 1);
-}
+void setNumDeleted(int masterNumDeleted, int slaveNumDeleted) {
+    Pair pair;
+    pair.masterNumDeleted = masterNumDeleted;
+    pair.slaveNumDeleted = slaveNumDeleted;
 
-void setNumDeleted(int numDeleted) {
     FILE* file = fopen(metaPath, "wb");
-    fwrite(&numDeleted, sizeof(int), 1, file);
+    fwrite(&pair, sizeof(Pair), 1, file);
     fclose(file);
 }
 
-int getNumDeleted() {
+void getNumDeleted(int* masterNumDeleted, int* slaveNumDeleted) {
+    Pair pair;
     FILE* file = fopen(metaPath, "rb");
-    int deleted;
-    fread(&deleted, sizeof(int), 1, file);
+    fread(&pair, sizeof(Pair), 1, file);
     fclose(file);
-    return deleted;
+
+    *masterNumDeleted = pair.masterNumDeleted;
+    *slaveNumDeleted = pair.slaveNumDeleted;
 }

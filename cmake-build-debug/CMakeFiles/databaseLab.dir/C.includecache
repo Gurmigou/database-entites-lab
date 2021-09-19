@@ -40,10 +40,6 @@ C:/Users/Yehor/CLionProjects/databaseLab/main.c
 src/CRUD.h
 C:/Users/Yehor/CLionProjects/databaseLab/src/CRUD.h
 
-C:/Users/Yehor/CLionProjects/databaseLab/src/CRUD.c
-CRUD.h
-C:/Users/Yehor/CLionProjects/databaseLab/src/CRUD.h
-
 C:/Users/Yehor/CLionProjects/databaseLab/src/CRUD.h
 stdio.h
 C:/Users/Yehor/CLionProjects/databaseLab/src/stdio.h
@@ -57,10 +53,6 @@ C:/Users/Yehor/CLionProjects/databaseLab/entities/CustomerMetaEntity.h
 C:/Users/Yehor/CLionProjects/databaseLab/entities/ReviewMetaEntity.h
 ../entities/IndexEntity.h
 C:/Users/Yehor/CLionProjects/databaseLab/entities/IndexEntity.h
-
-C:/Users/Yehor/CLionProjects/databaseLab/src/FileUtility.c
-FileUtility.h
-C:/Users/Yehor/CLionProjects/databaseLab/src/FileUtility.h
 
 C:/Users/Yehor/CLionProjects/databaseLab/src/FileUtility.h
 stdlib.h

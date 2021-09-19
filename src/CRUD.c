@@ -35,16 +35,11 @@ void runDataBase() {
 
     sortIndexTableRam(indexEntityArray, numberOfIndexEntityElements);
 
-    masterNumDeleted = 0;
-    slaveNumDeleted = 0;
+    getNumDeleted(&masterNumDeleted, &slaveNumDeleted);
 }
 
 void stopDataBase() {
-    CustomerMetaEntity customerBuffer;
-    ReviewMetaEntity reviewBuffer;
-
-//    rewriteWithoutDeletedElements(customerPath, sizeof(CustomerMetaEntity), &customerBuffer, customerIsDeleted);
-//    rewriteWithoutDeletedElements(reviewPath, sizeof(ReviewMetaEntity), &reviewBuffer, reviewIsDeleted);
+    setNumDeleted(masterNumDeleted, slaveNumDeleted);
     rewriteIndexTable(indexEntityArray, numberOfIndexEntityElements);
 
     // delete an array
@@ -52,6 +47,9 @@ void stopDataBase() {
 }
 
 bool createM(CustomerMetaEntity* data) {
+    if (data->pk < 0)
+        return false;
+
     CustomerMetaEntity tmp;
     // if the record already exists, update it
     if (readM(&tmp, data->pk, NULL, false) && !tmp.deleted)
@@ -76,6 +74,9 @@ bool createM(CustomerMetaEntity* data) {
 }
 
 bool createS(ReviewMetaEntity* data) {
+    if (data->pk < 0)
+        return false;
+
     ReviewMetaEntity tmp;
     // if the record already exists, update it
     if (readS(&tmp, data->pk, NULL) && !tmp.deleted)

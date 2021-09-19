@@ -83,8 +83,6 @@ int findFileIndexByPkRam(IndexEntity* arr, int length, int pk, bool toDelete) {
     int right = length - 1;
 
     while (left <= right) {
-        printf("left: %d, right: %d FUCK\n", left, right);
-
         int mid = (left + right) / 2;
 
         if (arr[mid].key == pk) {

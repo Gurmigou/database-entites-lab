@@ -73,8 +73,22 @@ void printResult(bool result) {
         printf("\bOperation wasn't done (pk problem)\n");
 }
 
+char commands[11][15] = {
+    "insert-m", "insert-s", "get-m", "get-s",
+    "update-m", "update-s", "delete-m", "delete-s",
+    "count-m", "count-s", "count-m-s"
+};
+
+void printAllCommands() {
+    printf("Commands:\n");
+    for (int i = 0; i < 11; ++i)
+        printf("\b%d) %s\n", (i + 1), commands[i]);
+}
+
 void userInput() {
     char command[20];
+
+    printAllCommands();
 
     while (true) {
         printf("Enter a command or \"quit\"\n");
@@ -132,6 +146,19 @@ void userInput() {
         else if (strcmp(command, "delete-s") == 0) {
             int pk = readNumber("\bInput slave pk: ");
             printResult(deleteS(pk));
+        }
+
+        else if (strcmp(command, "count-m") == 0)
+            printf("Number of customers: %d\n", countM());
+
+        else if (strcmp(command, "count-s") == 0)
+            printf("Number of reviews: %d\n", countS());
+
+        else if (strcmp(command, "count-m-s") == 0) {
+            int pk;
+            printf("PK:");
+            scanf("%d", &pk);
+            printf("Number of reviews of customer with id %d: %d\n", pk, countSWhichDependFromM(pk));
         }
 
         else
